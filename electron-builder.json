@@ -1,0 +1,15 @@
+{
+  "appId": "com.dovudkhon.cpu-analyzer",
+  "files": ["dist-electron", "dist-react"],
+  "icon": "./desktop512.png",
+  "mac": {
+    "target": "dmg"
+  },
+  "linux": {
+    "target": "AppImage",
+    "category": "Utility"
+  },
+  "win": {
+    "target": ["portable", "msi"]
+  }
+}
