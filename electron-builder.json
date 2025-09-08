@@ -1,6 +1,7 @@
 {
   "appId": "com.dovudkhon.cpu-analyzer",
   "files": ["dist-electron", "dist-react"],
+  "extraResources": ["dist-electron/preload.cjs"],
   "icon": "./desktop512.png",
   "mac": {
     "target": "dmg"

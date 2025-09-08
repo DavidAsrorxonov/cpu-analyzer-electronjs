@@ -1,5 +1,6 @@
 import osUtils from "os-utils";
 import fs from "fs";
+import os from "os";
 
 const POLLING_INTERVAL = 500;
 
@@ -7,8 +8,25 @@ export function pollResources() {
   setInterval(async () => {
     const cpuUsage = await getGPUUsage();
     const ramUsage = getRAMUsage();
-    console.log(`CPU usage: ${cpuUsage} and RAM usage: ${ramUsage}`);
+    const storageUsage = getStorageData();
+    console.log(
+      `CPU usage: ${cpuUsage} and RAM usage: ${ramUsage} and storage usage: ${
+        storageUsage.total
+      } GB (${storageUsage.usage * 100}%) used`
+    );
   }, POLLING_INTERVAL);
+}
+
+export function getStaticData() {
+  const totalStorage = getStorageData().total;
+  const cpuModel = os.cpus()[0].model;
+  const totalMemory = Math.floor(osUtils.totalmem() / 1024);
+
+  return {
+    totalStorage,
+    cpuModel,
+    totalMemory,
+  };
 }
 
 function getGPUUsage() {
@@ -27,7 +45,7 @@ function getStorageData() {
   const free = stats.bsize * stats.bfree;
 
   return {
-    total: Math.floor(total / 1_000_000),
+    total: Math.floor(total / 1_000_000_000),
     usage: 1 - free / total,
   };
 }
