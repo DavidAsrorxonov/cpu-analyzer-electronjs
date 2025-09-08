@@ -1,6 +1,6 @@
 type Statistics = {
   cpuUsage: number;
-  ramUsage: null;
+  ramUsage: number;
   storageUsage: number;
   totalStorage: number;
 };
